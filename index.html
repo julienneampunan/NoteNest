@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteNest | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+
+```
+<style>
+    .approved-resource-section {
+        margin-top: 25px;
+    }
+
+    .approved-resource-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 18px;
+    }
+
+    .approved-resource-card {
+        background: white;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .approved-resource-card h3 {
+        margin: 0;
+        color: #002147;
+        font-size: 18px;
+    }
+
+    .approved-resource-card p {
+        margin: 8px 0;
+        color: #6B7280;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .resource-info {
+        margin-top: 12px;
+        color: #4B5563;
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .approved-badge {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 5px 9px;
+        border-radius: 6px;
+        background: #DCFCE7;
+        color: #166534;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .resource-view-button {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 9px 13px;
+        border-radius: 7px;
+        background: #002147;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .resource-view-button:hover {
+        background: #003566;
+    }
+
+    .resource-empty {
+        padding: 35px;
+        text-align: center;
+        color: #6B7280;
+        background: white;
+        border: 1px solid #E1E5EA;
+        border-radius: 12px;
+        grid-column: 1 / -1;
+    }
+
+    .resource-loading {
+        padding: 35px;
+        text-align: center;
+        color: #6B7280;
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 800px) {
+        .approved-resource-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+```
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <div class="logo-box">N</div>
+
+        <div>
+            <h2>NoteNest</h2>
+            <span>Student Hub</span>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="index.html" class="nav-item active">
+            <span>⌂</span>
+            <span>Home</span>
+        </a>
+
+        <a href="notes.html" class="nav-item">
+            <span>▤</span>
+            <span>My Notes</span>
+        </a>
+
+        <a href="resources.html" class="nav-item">
+            <span>▥</span>
+            <span>Resources</span>
+        </a>
+
+        <a href="upload.html" class="nav-item">
+            <span>＋</span>
+            <span>Upload</span>
+        </a>
+
+        <a href="profile.html" class="nav-item">
+            <span>○</span>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="login.html" class="logout-link">
+            <span>↪</span>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+    <header class="topbar">
+
+        <div>
+            <h1>Welcome to NoteNest</h1>
+
+            <p>
+                Your student knowledge-sharing space.
+            </p>
+        </div>
+
+        <a
+            href="profile.html"
+            class="primary-button"
+        >
+            My Profile
+        </a>
+
+    </header>
+
+
+    <section class="content-section">
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="small-label">
+                        STUDENT KNOWLEDGE HUB
+                    </span>
+
+                    <h2>
+                        Learn. Share. Grow.
+                    </h2>
+
+                    <p>
+                        Find study materials, organize your notes,
+                        and share useful resources with fellow students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="home-actions">
+
+                <a
+                    href="resources.html"
+                    class="primary-button"
+                >
+                    Browse Resources
+                </a>
+
+                <a
+                    href="upload.html"
+                    class="secondary-button"
+                >
+                    Upload Resource
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Quick Access
+                    </h2>
+
+                    <p>
+                        Manage your study materials easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="resource-grid">
+
+                <a
+                    href="resources.html"
+                    class="resource-card"
+                >
+
+                    <div class="feature-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Resources
+                    </h3>
+
+                    <p>
+                        Explore study materials shared by students.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="upload.html"
+                    class="resource-card"
+                >
+
+                    <div class="feature-icon">
+                        ↑
+                    </div>
+
+                    <h3>
+                        Upload
+                    </h3>
+
+                    <p>
+                        Share your notes and learning materials.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="notes.html"
+                    class="resource-card"
+                >
+
+                    <div class="feature-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        My Notes
+                    </h3>
+
+                    <p>
+                        View the resources you have uploaded.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    class="resource-card"
+                >
+
+                    <div class="feature-icon">
+                        ○
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        View your NoteNest account information.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPROVED RESOURCES -->
+
+        <div class="page-card approved-resource-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="small-label">
+                        APPROVED RESOURCES
+                    </span>
+
+                    <h2>
+                        Recently Shared Resources
+                    </h2>
+
+                    <p>
+                        Resources approved by the NoteNest administrator.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div
+                id="approvedResources"
+                class="approved-resource-grid"
+            >
+
+                <div class="resource-loading">
+                    Loading approved resources...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="small-label">
+                        NOTE NEST
+                    </span>
+
+                    <h2>
+                        Share knowledge with your classmates.
+                    </h2>
+
+                    <p>
+                        NoteNest makes it easier for students
+                        to find, organize, and share academic resources.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="upload.html"
+                    class="primary-button"
+                >
+                    Start Sharing
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+```
+
+</div>
+
+<script>
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+async function loadApprovedResources() {
+
+    const container =
+        document.getElementById("approvedResources");
+
+    try {
+
+        const response = await fetch(
+            "../backend/student_resources.php",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
+        const text = await response.text();
+
+        console.log(
+            "STUDENT RESOURCE RESPONSE:",
+            text
+        );
+
+        let result;
+
+        try {
+
+            result = JSON.parse(text);
+
+        } catch (error) {
+
+            throw new Error(
+                "Server did not return valid JSON."
+            );
+
+        }
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Unable to load approved resources."
+            );
+
+        }
+
+
+        const resources =
+            result.data?.resources || [];
+
+
+        if (resources.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="resource-empty">
+
+                    <strong>
+                        No approved resources yet.
+                    </strong>
+
+                    <br><br>
+
+                    Resources approved by the administrator
+                    will appear here.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML = "";
+
+
+        resources.forEach(function(resource) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "approved-resource-card";
+
+
+            const filePath =
+                String(resource.file_path || "")
+                    .replace(/\\/g, "/");
+
+
+            card.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(
+                        resource.title ||
+                        "Untitled Resource"
+                    )}
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        resource.description ||
+                        "No description provided."
+                    )}
+                </p>
+
+                <div class="resource-info">
+
+                    <strong>Subject:</strong>
+                    ${escapeHTML(
+                        resource.subject || "—"
+                    )}
+
+                    <br>
+
+                    <strong>Course:</strong>
+                    ${escapeHTML(
+                        resource.course || "—"
+                    )}
+
+                    <br>
+
+                    <strong>Uploaded by:</strong>
+                    ${escapeHTML(
+                        resource.full_name ||
+                        "Unknown Student"
+                    )}
+
+                    <br>
+
+                    <strong>File:</strong>
+                    ${escapeHTML(
+                        resource.file_name || "—"
+                    )}
+
+                </div>
+
+                <span class="approved-badge">
+                    ✓ APPROVED
+                </span>
+
+                ${
+                    filePath
+                    ?
+                    `
+                    <br>
+
+                    <a
+                        href="${escapeHTML(filePath)}"
+                        target="_blank"
+                        class="resource-view-button"
+                    >
+                        View Resource
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            container.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "APPROVED RESOURCE ERROR:",
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="resource-empty">
+
+                <strong>
+                    Unable to load resources.
+                </strong>
+
+                <br><br>
+
+                <small>
+                    ${escapeHTML(
+                        error.message ||
+                        "Unknown error"
+                    )}
+                </small>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+loadApprovedResources();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NoteNest | My Uploads</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+```
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+```
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            N
+        </div>
+
+        <div>
+
+            <div class="brand-name">
+                NoteNest
+            </div>
+
+            <div class="brand-subtitle">
+                Student Knowledge Hub
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="index.html" class="sidebar-link">
+            <span class="sidebar-icon">🏠</span>
+            <span>Home</span>
+        </a>
+
+        <a href="resources.html" class="sidebar-link">
+            <span class="sidebar-icon">📚</span>
+            <span>Resources</span>
+        </a>
+
+        <a href="upload.html" class="sidebar-link">
+            <span class="sidebar-icon">📤</span>
+            <span>Upload Resource</span>
+        </a>
+
+        <a href="my-uploads.html" class="sidebar-link active">
+            <span class="sidebar-icon">📝</span>
+            <span>My Uploads</span>
+        </a>
+
+        <a href="profile.html" class="sidebar-link">
+            <span class="sidebar-icon">👤</span>
+            <span>Profile</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        <a
+            href="admin-login.html"
+            class="sidebar-link admin-link"
+        >
+            <span class="sidebar-icon">🔐</span>
+            <span>Admin Login</span>
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<main class="main-content">
+
+    <div class="page-header">
+
+        <h1>
+            My Uploads
+        </h1>
+
+        <p>
+            View the resources you have shared.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <div id="myUploadsContainer">
+
+            <div class="empty-state">
+
+                <h2>
+                    My Uploads
+                </h2>
+
+                <p>
+                    Your uploaded resources will appear here.
+                </p>
+
+                <br>
+
+                <a
+                    href="upload.html"
+                    class="btn-primary"
+                >
+                    Upload a Resource
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+```
+
+</div>
+
+<script>
+
+async function loadMyUploads() {
+
+    const container =
+        document.getElementById(
+            "myUploadsContainer"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "../backend/get_my_uploads.php",
+                {
+                    method: "GET",
+                    credentials: "include"
+                }
+            );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "MY UPLOADS RESPONSE:",
+            text
+        );
+
+
+        const data =
+            JSON.parse(text);
+
+
+        if (!data.success) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <h2>
+                        My Uploads
+                    </h2>
+
+                    <p>
+                        ${data.message || "Please log in first."}
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        if (
+            !data.resources ||
+            data.resources.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <h2>
+                        No Uploads Yet
+                    </h2>
+
+                    <p>
+                        You have not uploaded any resources yet.
+                    </p>
+
+                    <br>
+
+                    <a
+                        href="upload.html"
+                        class="btn-primary"
+                    >
+                        Upload a Resource
+                    </a>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        container.innerHTML = "";
+
+        data.resources.forEach(
+            function(resource) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "resource-card";
+
+                card.style.marginBottom =
+                    "15px";
+
+
+                let filePath =
+                    resource.file_path || "";
+
+
+                if (
+                    filePath.startsWith("/")
+                ) {
+
+                    filePath =
+                        ".." + filePath;
+
+                }
+                else if (
+                    !filePath.startsWith("uploads/")
+                ) {
+
+                    filePath =
+                        "../" + filePath;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <div class="resource-icon">
+                        📄
+                    </div>
+
+                    <h3>
+                        ${escapeHTML(resource.title)}
+                    </h3>
+
+                    <div class="resource-description">
+
+                        ${escapeHTML(
+                            resource.description ||
+                            "No description."
+                        )}
+
+                    </div>
+
+                    <div class="resource-meta">
+
+                        <span>
+                            ${escapeHTML(
+                                resource.subject ||
+                                "No Subject"
+                            )}
+                        </span>
+
+                        <span>
+                            ${escapeHTML(
+                                resource.course ||
+                                "No Course"
+                            )}
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="${escapeAttribute(filePath)}"
+                        target="_blank"
+                        class="open-resource"
+                    >
+                        Open Resource
+                    </a>
+
+                `;
+
+
+                container.appendChild(card);
+
+            }
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <h2>
+                    My Uploads
+                </h2>
+
+                <p>
+                    My uploads are currently unavailable.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        value == null ? "" : value;
+
+    return div.innerHTML;
+
+}
+
+
+function escapeAttribute(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadMyUploads
+);
+
+</script>
+
+</body>
+</html>

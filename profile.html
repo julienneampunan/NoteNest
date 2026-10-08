@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NoteNest | Profile</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+```
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+```
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-box">
+            N
+        </div>
+
+        <div>
+            <h2>NoteNest</h2>
+            <span>Student Hub</span>
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="index.html"
+            class="nav-item"
+        >
+            <span>⌂</span>
+            <span>Home</span>
+        </a>
+
+
+        <a
+            href="notes.html"
+            class="nav-item"
+        >
+            <span>▤</span>
+            <span>My Notes</span>
+        </a>
+
+
+        <a
+            href="resources.html"
+            class="nav-item"
+        >
+            <span>▥</span>
+            <span>Resources</span>
+        </a>
+
+
+        <a
+            href="upload.html"
+            class="nav-item"
+        >
+            <span>＋</span>
+            <span>Upload</span>
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item active"
+        >
+            <span>○</span>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="login.html"
+            class="logout-link"
+        >
+            <span>↪</span>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                View your NoteNest account information.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <section class="content-section">
+
+
+        <div class="page-card">
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">
+                    N
+                </div>
+
+
+                <div>
+
+                    <span class="small-label">
+                        NOTE NEST MEMBER
+                    </span>
+
+                    <h2 id="profileName">
+                        Student
+                    </h2>
+
+                    <p id="profileEmail">
+                        Login to view your account information.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Account Information
+                    </h2>
+
+                    <p>
+                        Your registered NoteNest information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="resource-grid">
+
+
+                <div class="resource-card">
+
+                    <span class="small-label">
+                        USERNAME
+                    </span>
+
+                    <h3 id="profileUsername">
+                        —
+                    </h3>
+
+                </div>
+
+
+                <div class="resource-card">
+
+                    <span class="small-label">
+                        COURSE
+                    </span>
+
+                    <h3 id="profileCourse">
+                        —
+                    </h3>
+
+                </div>
+
+
+                <div class="resource-card">
+
+                    <span class="small-label">
+                        YEAR LEVEL
+                    </span>
+
+                    <h3 id="profileYear">
+                        —
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Account
+                    </h2>
+
+                    <p>
+                        Your account information is stored in NoteNest.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    onclick="logout()"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+</div>
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const currentUser =
+            JSON.parse(
+                localStorage.getItem("currentUser")
+            );
+
+
+        if (!currentUser) {
+            return;
+        }
+
+
+        const name =
+            document.getElementById(
+                "profileName"
+            );
+
+        const email =
+            document.getElementById(
+                "profileEmail"
+            );
+
+        const username =
+            document.getElementById(
+                "profileUsername"
+            );
+
+        const course =
+            document.getElementById(
+                "profileCourse"
+            );
+
+        const year =
+            document.getElementById(
+                "profileYear"
+            );
+
+
+        if (name) {
+            name.textContent =
+                currentUser.full_name ||
+                currentUser.username ||
+                "Student";
+        }
+
+
+        if (email) {
+            email.textContent =
+                currentUser.email ||
+                "";
+        }
+
+
+        if (username) {
+            username.textContent =
+                currentUser.username ||
+                "—";
+        }
+
+
+        if (course) {
+            course.textContent =
+                currentUser.course ||
+                "—";
+        }
+
+
+        if (year) {
+            year.textContent =
+                currentUser.year_level ||
+                "—";
+        }
+
+    }
+);
+
+
+function logout() {
+
+    localStorage.removeItem(
+        "currentUser"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

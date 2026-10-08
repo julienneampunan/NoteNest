@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>NoteNest | My Notes</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+```
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+```
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-box">
+            N
+        </div>
+
+        <div>
+            <h2>NoteNest</h2>
+            <span>Student Hub</span>
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="index.html"
+            class="nav-item"
+        >
+            <span>⌂</span>
+            <span>Home</span>
+        </a>
+
+
+        <a
+            href="notes.html"
+            class="nav-item active"
+        >
+            <span>▤</span>
+            <span>My Notes</span>
+        </a>
+
+
+        <a
+            href="resources.html"
+            class="nav-item"
+        >
+            <span>▥</span>
+            <span>Resources</span>
+        </a>
+
+
+        <a
+            href="upload.html"
+            class="nav-item"
+        >
+            <span>＋</span>
+            <span>Upload</span>
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item"
+        >
+            <span>○</span>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="login.html"
+            class="logout-link"
+        >
+            <span>↪</span>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                My Notes
+            </h1>
+
+            <p>
+                View the study materials you have uploaded.
+            </p>
+
+        </div>
+
+
+        <a
+            href="upload.html"
+            class="primary-button"
+        >
+            + Upload Resource
+        </a>
+
+    </header>
+
+
+    <section class="content-section">
+
+        <div class="page-card">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        My Uploaded Resources
+                    </h2>
+
+                    <p>
+                        Your uploaded study materials will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="myUploadsList"
+                class="resource-grid"
+            >
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Loading your uploads...
+                    </h3>
+
+                    <p>
+                        Please wait while your resources are loaded.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+```
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

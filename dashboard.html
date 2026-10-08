@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NoteNest Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>NoteNest</h1>
+
+        <h2>Dashboard</h2>
+
+        <div id="studentInfo"></div>
+
+        <br>
+
+        <a href="notes.html">
+            Browse Notes
+        </a>
+
+        <br><br>
+
+        <a href="upload.html">
+            Upload Note
+        </a>
+
+        <br><br>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+    <script>
+
+        const student =
+            JSON.parse(localStorage.getItem("student"));
+
+        if (!student) {
+
+            window.location.href = "login.html";
+
+        } else {
+
+            document.getElementById("studentInfo").innerHTML = `
+                <p>Welcome, <strong>${student.full_name}</strong>!</p>
+                <p>${student.email}</p>
+                <p>${student.course || ""}</p>
+            `;
+
+        }
+
+        function logout() {
+
+            localStorage.removeItem("student");
+
+            window.location.href = "login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

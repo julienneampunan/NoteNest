@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NoteNest | Admin Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #F9F9FB;
+            color: #1A1A1A;
+        }
+
+        .admin-login-page {
+            min-height: 100vh;
+            display: flex;
+            background: #F9F9FB;
+        }
+
+        /* LEFT */
+
+        .admin-visual {
+            width: 52%;
+            min-height: 100vh;
+            background: #002147;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-visual::before {
+            content: "";
+            position: absolute;
+            width: 430px;
+            height: 430px;
+            border-radius: 50%;
+            background: rgba(255, 199, 44, 0.08);
+            top: -170px;
+            right: -130px;
+        }
+
+        .admin-visual::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: rgba(255, 199, 44, 0.06);
+            bottom: -140px;
+            left: -110px;
+        }
+
+        .admin-brand {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .admin-logo {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFC72C;
+            color: #002147;
+            border-radius: 16px;
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 28px;
+        }
+
+        .admin-brand h1 {
+            margin: 0;
+            color: white;
+            font-size: 46px;
+            line-height: 1.1;
+        }
+
+        .admin-brand h1 span {
+            color: #FFC72C;
+        }
+
+        .admin-brand p {
+            max-width: 470px;
+            margin-top: 18px;
+            color: rgba(255,255,255,0.78);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .admin-features {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .admin-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+        }
+
+        .admin-feature-icon {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(255,199,44,0.16);
+            color: #FFC72C;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* RIGHT */
+
+        .admin-form-side {
+            width: 48%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .admin-box {
+            width: 100%;
+            max-width: 470px;
+            background: white;
+            border: 1px solid #E1E5EA;
+            border-radius: 18px;
+            padding: 42px;
+            box-shadow: 0 12px 35px rgba(0, 33, 71, 0.08);
+        }
+
+        .admin-heading {
+            margin-bottom: 30px;
+        }
+
+        .admin-label {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #002147;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .admin-heading h2 {
+            margin: 0;
+            color: #002147;
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .admin-heading p {
+            margin-top: 9px;
+            color: #6B7280;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .admin-form-group {
+            margin-bottom: 20px;
+        }
+
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #002147;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .admin-form-group input {
+            width: 100%;
+            min-height: 50px;
+            padding: 13px 15px;
+            border: 1px solid #D5DBE1;
+            border-radius: 9px;
+            background: white;
+            color: #1A1A1A;
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .admin-form-group input:focus {
+            border-color: #002147;
+            box-shadow: 0 0 0 3px rgba(0,33,71,0.08);
+        }
+
+        .admin-button {
+            width: 100%;
+            min-height: 52px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: #002147;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-button:hover {
+            background: #003566;
+        }
+
+        .admin-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .admin-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .admin-message.show {
+            display: block;
+        }
+
+        .admin-message.error {
+            background: #FEF2F2;
+            color: #991B1B;
+            border: 1px solid #FECACA;
+        }
+
+        .admin-message.success {
+            background: #F0FDF4;
+            color: #166534;
+            border: 1px solid #BBF7D0;
+        }
+
+        .admin-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 28px 0;
+        }
+
+        .admin-divider::before,
+        .admin-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #E1E5EA;
+        }
+
+        .admin-divider span {
+            color: #9CA3AF;
+            font-size: 12px;
+        }
+
+        .student-login-link {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E1E5EA;
+            border-radius: 9px;
+            background: #FFFDF4;
+            color: #002147;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        .student-login-link:hover {
+            background: #FFF5D0;
+            border-color: #FFC72C;
+        }
+
+        .admin-back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #6B7280;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .admin-back:hover {
+            color: #002147;
+        }
+
+        @media (max-width: 900px) {
+
+            .admin-login-page {
+                display: block;
+            }
+
+            .admin-visual {
+                width: 100%;
+                min-height: auto;
+                padding: 45px 30px;
+                box-sizing: border-box;
+            }
+
+            .admin-brand h1 {
+                font-size: 38px;
+            }
+
+            .admin-features {
+                display: none;
+            }
+
+            .admin-form-side {
+                width: 100%;
+                min-height: auto;
+                padding: 35px 25px 50px;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .admin-visual {
+                padding: 35px 22px;
+            }
+
+            .admin-brand h1 {
+                font-size: 32px;
+            }
+
+            .admin-form-side {
+                padding: 25px 18px 40px;
+            }
+
+            .admin-box {
+                padding: 28px 22px;
+            }
+
+            .admin-heading h2 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="admin-login-page">
+
+    <!-- LEFT -->
+
+    <section class="admin-visual">
+
+        <div class="admin-brand">
+
+            <div class="admin-logo">
+                N
+            </div>
+
+            <h1>
+                NoteNest <span>Admin.</span>
+            </h1>
+
+            <p>
+                Manage the NoteNest platform, review student
+                accounts, and keep the shared learning space
+                organized and secure.
+            </p>
+
+            <div class="admin-features">
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">✓</div>
+                    <span>Manage student accounts</span>
+                </div>
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">✓</div>
+                    <span>Monitor shared resources</span>
+                </div>
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">✓</div>
+                    <span>Maintain the NoteNest platform</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <section class="admin-form-side">
+
+        <div class="admin-box">
+
+            <div class="admin-heading">
+
+                <span class="admin-label">
+                    ADMINISTRATOR
+                </span>
+
+                <h2>
+                    Admin Login
+                </h2>
+
+                <p>
+                    Sign in with your administrator account
+                    to manage NoteNest.
+                </p>
+
+            </div>
+
+
+            <div
+                id="adminMessage"
+                class="admin-message"
+            ></div>
+
+
+            <form id="adminLoginForm">
+
+                <div class="admin-form-group">
+
+                    <label for="adminEmail">
+                        Admin Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="adminEmail"
+                        name="email"
+                        placeholder="Enter admin email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="admin-form-group">
+
+                    <label for="adminPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        name="password"
+                        placeholder="Enter admin password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="admin-button"
+                >
+                    Sign In as Admin
+                </button>
+
+            </form>
+
+
+            <div class="admin-divider">
+                <span>OR</span>
+            </div>
+
+
+            <a
+                href="login.html"
+                class="student-login-link"
+            >
+                Student Login
+            </a>
+
+
+            <a
+                href="index.html"
+                class="admin-back"
+            >
+                ← Back to NoteNest
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+document
+    .getElementById("adminLoginForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const form = this;
+        const message =
+            document.getElementById("adminMessage");
+        const button =
+            form.querySelector("button");
+
+        const formData = new FormData(form);
+
+        message.className = "admin-message";
+        message.textContent = "";
+
+        button.disabled = true;
+        button.textContent = "Signing in...";
+
+        try {
+
+            const response = await fetch(
+                "../backend/admin_login.php",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const text = await response.text();
+
+            console.log("ADMIN LOGIN RESPONSE:", text);
+
+            let data;
+
+            try {
+                data = JSON.parse(text);
+            } catch (error) {
+                throw new Error(
+                    "Invalid server response: " + text
+                );
+            }
+
+            if (data.success) {
+
+                localStorage.setItem(
+                    "currentAdmin",
+                    JSON.stringify(data.data.admin)
+                );
+
+                message.className =
+                    "admin-message success show";
+
+                message.textContent =
+                    "Admin login successful. Redirecting...";
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "admin.html";
+
+                }, 500);
+
+            } else {
+
+                message.className =
+                    "admin-message error show";
+
+                message.textContent =
+                    data.message ||
+                    "Invalid admin email or password.";
+
+                button.disabled = false;
+                button.textContent = "Sign In as Admin";
+            }
+
+        } catch (error) {
+
+            console.error("ADMIN LOGIN ERROR:", error);
+
+            message.className =
+                "admin-message error show";
+
+            message.textContent =
+                "Unable to connect to the NoteNest server.";
+
+            button.disabled = false;
+            button.textContent = "Sign In as Admin";
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

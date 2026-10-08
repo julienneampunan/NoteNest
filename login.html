@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteNest | Login</title>
+    <link rel="stylesheet" href="css/style.css">
+
+```
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #F9F9FB;
+    }
+
+    .login-page {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+    }
+
+    .login-visual {
+        width: 52%;
+        min-height: 100vh;
+        background: #002147;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 70px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-visual::before {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: rgba(255, 199, 44, 0.08);
+        top: -160px;
+        right: -120px;
+    }
+
+    .login-visual::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 199, 44, 0.06);
+        bottom: -120px;
+        left: -100px;
+    }
+
+    .login-brand {
+        width: 100%;
+        max-width: 520px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .login-brand-logo {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #FFC72C;
+        color: #002147;
+        border-radius: 16px;
+        font-size: 36px;
+        font-weight: 800;
+        margin-bottom: 28px;
+    }
+
+    .login-brand h1 {
+        color: white;
+        font-size: 48px;
+        line-height: 1.1;
+        margin: 0;
+    }
+
+    .login-brand h1 span {
+        color: #FFC72C;
+    }
+
+    .login-brand p {
+        max-width: 470px;
+        margin-top: 18px;
+        color: rgba(255,255,255,0.78);
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .login-benefits {
+        margin-top: 35px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .login-benefit {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(255,255,255,0.9);
+        font-size: 15px;
+    }
+
+    .benefit-icon {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        background: rgba(255,199,44,0.16);
+        color: #FFC72C;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .login-form-side {
+        width: 48%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+        background: #F9F9FB;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 470px;
+        background: white;
+        border: 1px solid #E1E5EA;
+        border-radius: 18px;
+        padding: 42px;
+        box-shadow: 0 12px 35px rgba(0, 33, 71, 0.08);
+    }
+
+    .login-heading {
+        margin-bottom: 30px;
+    }
+
+    .small-label {
+        display: inline-block;
+        margin-bottom: 10px;
+        color: #002147;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+    }
+
+    .login-heading h2 {
+        margin: 0;
+        color: #002147;
+        font-size: 32px;
+        line-height: 1.2;
+    }
+
+    .login-heading p {
+        margin-top: 9px;
+        color: #6B7280;
+        font-size: 15px;
+    }
+
+    .login-form-group {
+        margin-bottom: 20px;
+    }
+
+    .login-form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #002147;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .login-form-group input {
+        width: 100%;
+        min-height: 50px;
+        padding: 13px 15px;
+        border: 1px solid #D5DBE1;
+        border-radius: 9px;
+        background: white;
+        color: #1A1A1A;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .login-form-group input:focus {
+        border-color: #002147;
+        box-shadow: 0 0 0 3px rgba(0,33,71,0.08);
+    }
+
+    .login-button {
+        width: 100%;
+        min-height: 52px;
+        margin-top: 8px;
+        border: none;
+        border-radius: 9px;
+        background: #002147;
+        color: white;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .login-button:hover {
+        background: #003566;
+    }
+
+    .login-button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    .login-message {
+        display: none;
+        margin-bottom: 18px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .login-message.show {
+        display: block;
+    }
+
+    .login-message.error {
+        background: #FEF2F2;
+        color: #991B1B;
+        border: 1px solid #FECACA;
+    }
+
+    .login-message.success {
+        background: #F0FDF4;
+        color: #166534;
+        border: 1px solid #BBF7D0;
+    }
+
+    .login-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 28px 0;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #E1E5EA;
+    }
+
+    .login-divider span {
+        color: #9CA3AF;
+        font-size: 12px;
+    }
+
+    .admin-login-button {
+        width: 100%;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        border: 1px solid #002147;
+        border-radius: 9px;
+        background: white;
+        color: #002147;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .admin-login-button:hover {
+        background: #FFF5D0;
+        border-color: #FFC72C;
+    }
+
+    .admin-icon {
+        font-size: 17px;
+    }
+
+    .login-register {
+        text-align: center;
+        margin-top: 22px;
+        color: #6B7280;
+        font-size: 14px;
+    }
+
+    .login-register a {
+        color: #002147;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .back-home {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        color: #6B7280;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+    .back-home:hover {
+        color: #002147;
+    }
+
+    @media (max-width: 900px) {
+        .login-page {
+            display: block;
+        }
+
+        .login-visual {
+            width: 100%;
+            min-height: auto;
+            padding: 45px 30px;
+        }
+
+        .login-brand h1 {
+            font-size: 38px;
+        }
+
+        .login-benefits {
+            display: none;
+        }
+
+        .login-form-side {
+            width: 100%;
+            min-height: auto;
+            padding: 35px 25px 50px;
+        }
+
+        .login-box {
+            max-width: 550px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .login-visual {
+            padding: 35px 22px;
+        }
+
+        .login-brand-logo {
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+        }
+
+        .login-brand h1 {
+            font-size: 32px;
+        }
+
+        .login-brand p {
+            font-size: 14px;
+        }
+
+        .login-form-side {
+            padding: 25px 18px 40px;
+        }
+
+        .login-box {
+            padding: 28px 22px;
+        }
+
+        .login-heading h2 {
+            font-size: 27px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+```
+<section class="login-visual">
+
+    <div class="login-brand">
+
+        <div class="login-brand-logo">
+            N
+        </div>
+
+        <h1>
+            Welcome to <span>NoteNest.</span>
+        </h1>
+
+        <p>
+            Your student knowledge-sharing space for
+            discovering, organizing, and sharing useful
+            academic resources.
+        </p>
+
+        <div class="login-benefits">
+
+            <div class="login-benefit">
+                <div class="benefit-icon">✓</div>
+                <span>Organize your study notes</span>
+            </div>
+
+            <div class="login-benefit">
+                <div class="benefit-icon">✓</div>
+                <span>Discover resources from students</span>
+            </div>
+
+            <div class="login-benefit">
+                <div class="benefit-icon">✓</div>
+                <span>Share your own learning materials</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="login-form-side">
+
+    <div class="login-box">
+
+        <div class="login-heading">
+
+            <span class="small-label">
+                STUDENT ACCOUNT
+            </span>
+
+            <h2>
+                Sign in to NoteNest
+            </h2>
+
+            <p>
+                Enter your account details to continue.
+            </p>
+
+        </div>
+
+        <div id="loginMessage" class="login-message"></div>
+
+        <form id="loginForm">
+
+            <div class="login-form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+            <div class="login-form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="login-button"
+                id="studentLoginButton"
+            >
+                Sign In
+            </button>
+
+        </form>
+
+        <div class="login-divider">
+            <span>OR</span>
+        </div>
+
+        <a
+            href="admin-login.html"
+            class="admin-login-button"
+        >
+            <span class="admin-icon">🔐</span>
+            <span>Admin Login</span>
+        </a>
+
+        <div class="login-register">
+            Don't have an account?
+            <a href="register.html">
+                Create Account
+            </a>
+        </div>
+
+        <a
+            href="index.html"
+            class="back-home"
+        >
+            ← Back to NoteNest
+        </a>
+
+    </div>
+
+</section>
+```
+
+</div>
+
+<script>
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const message =
+            document.getElementById("loginMessage");
+
+        const button =
+            document.getElementById("studentLoginButton");
+
+        const form =
+            document.getElementById("loginForm");
+
+        const formData =
+            new FormData(form);
+
+        message.className = "login-message";
+        message.textContent = "";
+
+        button.disabled = true;
+        button.textContent = "Signing in...";
+
+        try {
+
+            /*
+             * IMPORTANT:
+             * login.html is inside /frontend
+             * login.php is inside /backend
+             */
+            const response = await fetch(
+                "../backend/login.php",
+                {
+                    method: "POST",
+                    body: formData,
+                    credentials: "include"
+                }
+            );
+
+            const text = await response.text();
+
+            console.log("LOGIN HTTP STATUS:", response.status);
+            console.log("LOGIN RAW RESPONSE:", text);
+
+            let data;
+
+            try {
+                data = JSON.parse(text);
+            } catch (jsonError) {
+
+                throw new Error(
+                    "Server did not return JSON. HTTP " +
+                    response.status +
+                    ": " +
+                    text.substring(0, 300)
+                );
+            }
+
+            if (data.success) {
+
+                if (data.user) {
+
+                    localStorage.setItem(
+                        "currentUser",
+                        JSON.stringify(data.user)
+                    );
+
+                }
+
+                message.className =
+                    "login-message success show";
+
+                message.textContent =
+                    "Login successful. Redirecting...";
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 500);
+
+            } else {
+
+                message.className =
+                    "login-message error show";
+
+                message.textContent =
+                    data.message ||
+                    "Invalid email or password.";
+
+                button.disabled = false;
+                button.textContent = "Sign In";
+
+            }
+
+        } catch (error) {
+
+            console.error("LOGIN ERROR:", error);
+
+            message.className =
+                "login-message error show";
+
+            message.textContent =
+                error.message ||
+                "Unable to connect to NoteNest.";
+
+            button.disabled = false;
+            button.textContent = "Sign In";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
